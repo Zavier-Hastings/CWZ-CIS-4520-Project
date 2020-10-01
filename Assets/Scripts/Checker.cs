@@ -42,11 +42,11 @@ public class Checker : MonoBehaviour
         float y = board_y;
 
 
-        x *= 2.5f;
-        y *= 2.5f;
+        x *= 3.75f;
+        y *= 3.75f;
 
-        x += -8.75f;
-        y += -8.8f;
+        x += -13.14f;
+        y += -13.16f;
 
 
         this.transform.position = new Vector3(x, y, -1.0f);
@@ -133,11 +133,11 @@ public class Checker : MonoBehaviour
         float x = arrayX;
         float y = arrayY;
 
-        x *= 2.5f;
-        y *= 2.5f;
+        x *= 3.75f;
+        y *= 3.75f;
 
-        x += -8.75f;
-        y += -8.8f;
+        x += -13.15f;
+        y += -13.15f;
 
         //displays plate on screen
         GameObject mp = Instantiate(moveplate, new Vector3(x, y, -3.0f), Quaternion.identity);
