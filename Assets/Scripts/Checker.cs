@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
-    //references
+    ///references.
     public GameObject controller;
     public GameObject moveplate;
 
-    //positions
-    private int board_x = -1;
+    ///positions.
+    private int board_x = -1; 
     private int board_y = -1;
 
-    //variable for different players
+    ///variable for different players.
     private string player;
 
     public Sprite red_checker;
     public Sprite black_checker;
 
-    //Creates red or black checker and sets it's position when called
-    public void Activate()
+
+    public void Activate() //!<Creates red or black checker and sets it's position when called
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
 
@@ -35,8 +35,7 @@ public class Checker : MonoBehaviour
         }
     }
 
-    //sets visual coordinates of checkers
-    public void set_coords()
+    public void set_coords() //!<Sets visual coordinate of checkers
     {
         float x = board_x;
         float y = board_y;
@@ -52,39 +51,33 @@ public class Checker : MonoBehaviour
         this.transform.position = new Vector3(x, y, -1.0f);
     }
 
-    //returns board position x
-    public int get_board_x()
+    public int get_board_x() //!<Returns x board position
     {
         return board_x;
     }
 
-    //returns board position y
-    public int get_board_y()
+    public int get_board_y() //!<Returns y board position
     {
         return board_y;
     }
 
-    //sets board position x
-    public void set_board_x(int x)
+    public void set_board_x(int x) //!<Sets x board position
     {
         board_x = x;
     }
 
-    //sets board position y
-    public void set_board_y(int y)
+    public void set_board_y(int y) //!<Sets y board position
     {
         board_y = y;
     }
 
-    //removes and creates move plates for checkers on click
-    private void OnMouseUp()
+    private void OnMouseUp() //!<Removes and creates move plates for checkers after clicking a checker
     {
         remove_plates();
         checker_plates();
     }
 
-    //gets rid of existing move plates
-    public void remove_plates()
+    public void remove_plates() //!<Gets rid of any existing move plates
     {
         GameObject[] moveplates = GameObject.FindGameObjectsWithTag("Moveplate");
         for (int i = 0; i < moveplates.Length; i++)
@@ -93,8 +86,7 @@ public class Checker : MonoBehaviour
         }
     }
 
-    //creates plates depending on checker clicked
-    public void checker_plates()
+    public void checker_plates() //!<Places move plates based on color of checker
     {
         if (this.name == "red_checker")
         {
@@ -108,8 +100,7 @@ public class Checker : MonoBehaviour
         }
     }
 
-    //places the plates in the right spot when called
-    public void place_plates(int x, int y)
+    public void place_plates(int x, int y) //!<When called, places move plates in correct position
     {
         GameManager sc = controller.GetComponent<GameManager>();
         if (sc.position_open(x, y))
@@ -127,8 +118,7 @@ public class Checker : MonoBehaviour
         }
     }
 
-    //spawns the plates into existence and sets their visual placement
-    public void spawn_plates(int arrayX, int arrayY)
+    public void spawn_plates(int arrayX, int arrayY) //!<Spawns and places move plates visually on the board
     {
         float x = arrayX;
         float y = arrayY;
@@ -139,10 +129,9 @@ public class Checker : MonoBehaviour
         x += -13.15f;
         y += -13.15f;
 
-        //displays plate on screen
-        GameObject mp = Instantiate(moveplate, new Vector3(x, y, -3.0f), Quaternion.identity);
+        GameObject mp = Instantiate(moveplate, new Vector3(x, y, -3.0f), Quaternion.identity); //!< Displays plate on screen
 
-        //keep track of new position
+        ///Keeps track of new position.
         movescript mpScript = mp.GetComponent<movescript>();
         mpScript.set_reference(gameObject);
         mpScript.set_coords(arrayX, arrayY);

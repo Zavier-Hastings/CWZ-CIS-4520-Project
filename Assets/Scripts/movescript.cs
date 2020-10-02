@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class movescript : MonoBehaviour
 {
-    //reference variables
+    ///Reference variables.
     public GameObject controller;
 
     GameObject reference = null;
 
-    //Board positions
+    ///Board positions.
     int arrayX;
     int arrayY;
 
-    //false = movement, true = capture
-    public bool capture = false;
-
+    public bool capture = false; //!<false = movement, true = capture
+    
     public void Start()
     {
         if (capture)
         {
-            //change moveplate sprite to red
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f); //!<Changes moveplate sprite to red on capture
         }
     }
 
-    //removes checker and moves it to new space when moevplate is clicked, and destroys checkers that are captured
-    public void OnMouseUp()
+    public void OnMouseUp() //!<When move plate is clicked, moves checker to the move plate's spot, removes move plates, and destroys captured checkers
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
 
@@ -39,32 +36,29 @@ public class movescript : MonoBehaviour
         controller.GetComponent<GameManager>().move_space(reference.GetComponent<Checker>().get_board_x(),
             reference.GetComponent<Checker>().get_board_y());
 
-        //set new space for piece
+        ///Set new space for piece.
         reference.GetComponent<Checker>().set_board_x(arrayX);
         reference.GetComponent<Checker>().set_board_y(arrayY);
-        //keep track of new location
+        ///Keep track of new location.
         reference.GetComponent<Checker>().set_coords();
-        //controller tracks new position as well
+        ///Controller tracks new position as well.
         controller.GetComponent<GameManager>().set_position(reference);
 
         reference.GetComponent<Checker>().remove_plates();
     }
 
-    //sets coordinates for moveplates
-    public void set_coords(int x, int y)
+    public void set_coords(int x, int y) //!<Sets move plate coordinates
     {
         arrayX = x;
         arrayY = y;
     }
 
-    //sets reference
-    public void set_reference(GameObject obj)
+    public void set_reference(GameObject obj) //!<Sets reference
     {
         reference = obj;
     }
 
-    //gives reference
-    public GameObject get_reference()
+    public GameObject get_reference() //!<Returns reference
     {
         return reference;
     }

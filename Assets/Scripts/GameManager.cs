@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //allows prefab checker to be used as checker_piece in script
-    public GameObject checker_piece;
+    ///allows prefab checker to be used as checker_piece in script.
+    public GameObject checker_piece; 
 
-    //positions and number of checkers for each player
+    ///positions and number of checkers for each player.
     private GameObject[,] positions = new GameObject[8, 8];
     private GameObject[] player_red = new GameObject[12];
     private GameObject[] player_black = new GameObject[12];
 
-    //starting player
-    private string current_player = "red";
+    private string current_player = "red"; //!<Starting player
 
-    //is the game over?
-    private bool game_over = false;
+    private bool game_over = false; //!<Variable for game over
 
-    //On start, creates checkers and puts them into their appropriate spots in the array
-    void Start()
+    void Start() //!<On play, creates checkers and puts them in their appropriate positions in the array
     {
 
         player_red = new GameObject[]
@@ -61,8 +58,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //creates checker piece and sets name and board position
-    public GameObject Create(string name, int x, int y)
+    public GameObject Create(string name, int x, int y) //!<Creates checker piece and sets name and board position
     {
         GameObject obj = Instantiate(checker_piece, new Vector3(0, 0, -1), Quaternion.identity);
         Checker ch = obj.GetComponent<Checker>();
@@ -73,27 +69,23 @@ public class GameManager : MonoBehaviour
         return obj;
     }
 
-    //sets position of checkers
-    public void set_position(GameObject obj)
+    public void set_position(GameObject obj) //!<Sets position of checkers
     {
         Checker ch = obj.GetComponent<Checker>();
         positions[ch.get_board_x(), ch.get_board_y()] = obj;
     }
 
-    //removes checker when moved
-    public void move_space(int x, int y)
+    public void move_space(int x, int y) //!<Removes old checker when checkers are moved
     {
         positions[x, y] = null;
     }
 
-    //gives position
-    public GameObject get_position(int x, int y)
+    public GameObject get_position(int x, int y) //!<Returns positions
     {
         return positions[x, y];
     }
 
-    //checks if a position is occupied or empty
-    public bool position_open(int x, int y)
+    public bool position_open(int x, int y) //!<Checks if a position is occupied or empty
     {
         if (x < 0 || y < 0 || x >= positions.GetLength(0) || y >= positions.GetLength(1)) return false;
         return true;
