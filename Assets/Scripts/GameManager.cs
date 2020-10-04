@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -89,5 +90,36 @@ public class GameManager : MonoBehaviour
     {
         if (x < 0 || y < 0 || x >= positions.GetLength(0) || y >= positions.GetLength(1)) return false;
         return true;
+    }
+
+    public string get_current_player() //!<Returns current player
+    {
+        return current_player;
+    }
+
+    public bool is_game_over() //!<Returns game_over
+    {
+        return game_over;
+    }
+
+    public void change_player() //!<When called, changes the current player
+    {
+        if (current_player == "red")
+        {
+            current_player = "black";
+        } else
+        {
+            current_player = "red";
+        }
+    }
+
+    public void Update() //!<On update, checks if the game is over and if the player is left clicking. Currently only restarts game. 
+    {
+        if (game_over == true && Input.GetMouseButtonDown(0) )
+        {
+            game_over = false;
+
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 }

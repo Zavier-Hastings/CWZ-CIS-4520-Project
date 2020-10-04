@@ -44,6 +44,8 @@ public class movescript : MonoBehaviour
         ///Controller tracks new position as well.
         controller.GetComponent<GameManager>().set_position(reference);
 
+        controller.GetComponent<GameManager>().change_player();
+
         reference.GetComponent<Checker>().remove_plates();
     }
 

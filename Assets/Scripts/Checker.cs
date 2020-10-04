@@ -73,8 +73,11 @@ public class Checker : MonoBehaviour
 
     private void OnMouseUp() //!<Removes and creates move plates for checkers after clicking a checker
     {
-        remove_plates();
-        checker_plates();
+        if (!controller.GetComponent<GameManager>().is_game_over() && controller.GetComponent<GameManager>().get_current_player() == player)
+        {
+            remove_plates();
+            checker_plates();
+        }
     }
 
     public void remove_plates() //!<Gets rid of any existing move plates
