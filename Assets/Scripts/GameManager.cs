@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         return obj;
     }
 
-    public void set_position(GameObject obj) //!<Sets position of checkers
+        public void set_position(GameObject obj) //!<Sets position of checkers
     {
         Checker ch = obj.GetComponent<Checker>();
         positions[ch.get_board_x(), ch.get_board_y()] = obj;

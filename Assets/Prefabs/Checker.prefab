@@ -100,6 +100,12 @@ MonoBehaviour:
   moveplate: {fileID: 7001375950429514528, guid: 6d74b2c5fdd3c4b948311ed466d2df12, type: 3}
   red_checker: {fileID: 21300000, guid: de20bc68692ad7c43b27880b2dc6fe75, type: 3}
   black_checker: {fileID: 21300000, guid: 4579c90adda15cb4d9cb87c3ea7823cc, type: 3}
+  red_king: {fileID: 21300000, guid: 16cc57b95a50e9f4ebbaba2003be5acc, type: 3}
+  black_king: {fileID: 21300000, guid: 429241808647c9941a9c3a69478681a8, type: 3}
+  red_checker_captured: {fileID: 21300000, guid: 890a97dd61622b044b3c2499272a1d7d, type: 3}
+  black_checker_captured: {fileID: 21300000, guid: dd72674c01c7d0e4fafa168ea1565701, type: 3}
+  red_king_captured: {fileID: 21300000, guid: e4ef4ab2c62a4bb46a73a4098b0518af, type: 3}
+  black_king_captured: {fileID: 21300000, guid: 113d956731dc4cb488809575de63ba87, type: 3}
 --- !u!61 &8458719812610511991
 BoxCollider2D:
   m_ObjectHideFlags: 0

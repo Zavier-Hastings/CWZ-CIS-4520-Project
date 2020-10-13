@@ -23,7 +23,7 @@ public class movescript : MonoBehaviour
         }
     }
 
-    public void OnMouseUp() //!<When move plate is clicked, moves checker to the move plate's spot, removes move plates, and destroys captured checkers
+    public void OnMouseUp() //!<When move plate is clicked, moves checker to the move plate's spot, removes move plates, destroys captured checkerss, and kings checkers
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
 
@@ -43,6 +43,17 @@ public class movescript : MonoBehaviour
         reference.GetComponent<Checker>().set_coords();
         ///Controller tracks new position as well.
         controller.GetComponent<GameManager>().set_position(reference);
+        
+        if (reference.GetComponent<Checker>().name == "red_checker" && arrayY == 7)
+            ///If a red checker makes it to the other end of the board, it will be kinged
+        {
+            reference.GetComponent<Checker>().create_r_king();
+
+        } else if (reference.GetComponent<Checker>().name == "black_checker" && arrayY == 0)
+            ///Otherwise, if a black checker makes it to the other side of the board, it will be kinged
+        {
+            reference.GetComponent<Checker>().create_b_king();
+        }
 
         controller.GetComponent<GameManager>().change_player();
 
