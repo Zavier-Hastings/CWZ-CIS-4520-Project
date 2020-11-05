@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +45,7 @@ public class movescript : MonoBehaviour
         controller.GetComponent<GameManager>().set_position(reference);
         
         if (reference.GetComponent<Checker>().name == "red_checker" && arrayY == 7)
-            ///If a red checker makes it to the other end of the board, it will be kinged
+            ///If a red checker makes it to the other end of the board, it will be 	ed
         {
             reference.GetComponent<Checker>().create_r_king();
 

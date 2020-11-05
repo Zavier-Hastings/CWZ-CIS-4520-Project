@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -152,7 +152,9 @@ public class Checker : MonoBehaviour
             }
             else if (ch.GetComponent<Checker>().player != player)
             {
-                spawn_capture_plates(x, y);
+    
+		spawn_capture_plates(x, y);
+		
             }
         }
     }
@@ -181,8 +183,31 @@ public class Checker : MonoBehaviour
     //have to be done continously until there are no more jumps left. Will also
     //have to delete capture plates as they are created until we reach the end
     //of that jump. In addition, combine with move plate spawn
+
     public void spawn_capture_plates(int x, int y)
     {
+	
+	if (this.name == "red_checker") //!<Check if the piece being moved is red, so will y axis will inrease
+	{
+		if (board_x > x){
+		
+				spawn_plates(x-1, y+1);
+				}
+		else {
+				spawn_plates(x+1, y+1);
+			}
+			
+	}
+	
+	if (this.name == "black_checker")
+	{
+		if (board_x > x){
+		spawn_plates(x-1, y-1);
+		}
+		else {
+	spawn_plates(x+1, y-1);
+			}
+	}
 
     }
 }
