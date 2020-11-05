@@ -142,7 +142,7 @@ public class Checker : MonoBehaviour
     public void place_plates(int x, int y) //!<When called, places move plates in correct position
     {
         GameManager sc = controller.GetComponent<GameManager>();
-        if (sc.position_open(x, y)) //!<If the adjacent square is open, then just spawn a plate.
+        if (sc.position_open(x, y))
         {
             GameObject ch = sc.get_position(x, y);
 
@@ -150,38 +150,10 @@ public class Checker : MonoBehaviour
             {
                 spawn_plates(x, y);
             }
-            else if (ch.GetComponent<Checker>().player != player) //<! if the adjacent square is an opponent piece
+            else if (ch.GetComponent<Checker>().player != player)
             {
-    //<! if the adjacent square to the opponent, where checker would land is empty then spawn a capture plate
-
-
-			if (this.name == "red_checker") //!<Check if the piece being moved is red, so will y axis will inrease
-	{
-		ch = sc.get_position(x-1, y+1);
-		if (board_x > x && (ch == null)){ //<!board_x = the moving checker
-		
-				spawn_plates(x-1, y+1);
-				}
-		else if (board_x < x && sc.get_position(x+1, y=1) == null){
-				spawn_plates(x+1, y+1);
-			}
-			
-	}
-	
-	if (this.name == "black_checker")
-	{
-	ch = sc.get_position(x, y);
-		if (board_x > x){
-		spawn_plates(x-1, y-1);
-		}
-		else {
-	spawn_plates(x+1, y-1);
-			}
-	}
-
-    }
-
-		//<!spawn_capture_plates(x, y);
+    
+		spawn_capture_plates(x, y);
 		
             }
         }
@@ -214,15 +186,13 @@ public class Checker : MonoBehaviour
 
     public void spawn_capture_plates(int x, int y)
     {
-	
-        
+	GameManager sc = controller.GetComponent<GameManager>();
 	if (this.name == "red_checker") //!<Check if the piece being moved is red, so will y axis will inrease
 	{
-		if (board_x > x){
-		
+		if (board_x > x && (sc.get_position(x-1, y+1)==null)){
 				spawn_plates(x-1, y+1);
 				}
-		else if (board_x < x){
+		else if (board_x <x && (sc.get_position(x+1, y+1)==null)){
 				spawn_plates(x+1, y+1);
 			}
 			
@@ -230,10 +200,10 @@ public class Checker : MonoBehaviour
 	
 	if (this.name == "black_checker")
 	{
-		if (board_x > x){
+		if (board_x > x&& (sc.get_position(x-1, y-1)==null)){
 		spawn_plates(x-1, y-1);
 		}
-		else {
+		else if (board_x < x && (sc.get_position(x+1, y-1)==null)){
 	spawn_plates(x+1, y-1);
 			}
 	}
