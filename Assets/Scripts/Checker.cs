@@ -191,6 +191,7 @@ public class Checker : MonoBehaviour
 	{
 		if (board_x > x && (sc.get_position(x-1, y+1)==null)){
 				spawn_plates(x-1, y+1);
+				
 				}
 		else if (board_x <x && (sc.get_position(x+1, y+1)==null)){
 				spawn_plates(x+1, y+1);

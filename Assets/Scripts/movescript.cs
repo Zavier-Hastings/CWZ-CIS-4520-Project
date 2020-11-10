@@ -35,17 +35,30 @@ public class movescript : MonoBehaviour
 
         controller.GetComponent<GameManager>().move_space(reference.GetComponent<Checker>().get_board_x(),
             reference.GetComponent<Checker>().get_board_y());
-
+	
         ///Set new space for piece.
+	// check if is a capture first 
+	int newX = arrayX; // where the piece is going
+	int newY = arrayY; // where the piece is going
+	int oldX = reference.GetComponent<Checker>().get_board_x(); // where the piece was
+	int oldY = reference.GetComponent<Checker>().get_board_y(); // where the piece was
+
+	if (oldY + 2 == newY || oldY - 2 == newY) { // if is moving more than one row, is a capture, so 
+		// average the coordinates to identify
+	 	GameObject ch = controller.GetComponent<GameManager>().get_position((oldX+newX)/2, (oldY+newY)/2);
+		Destroy(ch); // remove the captured piece.
+		}
+
         reference.GetComponent<Checker>().set_board_x(arrayX);
         reference.GetComponent<Checker>().set_board_y(arrayY);
+	
         ///Keep track of new location.
         reference.GetComponent<Checker>().set_coords();
         ///Controller tracks new position as well.
         controller.GetComponent<GameManager>().set_position(reference);
-        
+         
         if (reference.GetComponent<Checker>().name == "red_checker" && arrayY == 7)
-            ///If a red checker makes it to the other end of the board, it will be 	ed
+            ///If a red checker makes it to the other end of the board, it will be kinged
         {
             reference.GetComponent<Checker>().create_r_king();
 
