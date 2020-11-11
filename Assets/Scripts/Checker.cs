@@ -188,26 +188,54 @@ public class Checker : MonoBehaviour
     {
 	GameManager sc = controller.GetComponent<GameManager>();
 	if (this.name == "red_checker") //!<Check if the piece being moved is red, so will y axis will inrease
-	{
-		if (board_x > x && (sc.get_position(x-1, y+1)==null)){
+		{
+		if (x>0  && y < 7)	{	
+			if (board_x > x && (sc.get_position(x-1, y+1)==null) && y+1 < 8 && x-1 > -1){
 				spawn_plates(x-1, y+1);
-				
-				}
-		else if (board_x <x && (sc.get_position(x+1, y+1)==null)){
+			}
+							}
+		if (x<7 && y < 7)	{
+		if (board_x <x && (sc.get_position(x+1, y+1)==null) && x+1 < 8 && y+1 <8){
 				spawn_plates(x+1, y+1);
 			}
-			
-	}
-	
-	if (this.name == "black_checker")
+							}
+		}
+	if (this.name == "red_king" || this.name == "black_king")
 	{
-		if (board_x > x&& (sc.get_position(x-1, y-1)==null)){
+		if (x>0 && y<7)	{
+		if (board_x > x && board_y < y && (sc.get_position(x-1, y+1)==null) && y+1 < 8 && x-1 > -1){
+				spawn_plates(x-1, y+1);
+			}
+						}
+		if (x<7 && y<7)	{				
+		 if (board_x < x && board_y < y && (sc.get_position(x+1, y+1)==null) && x+1<8 && y+1 < 8){
+				spawn_plates(x+1, y+1); //spawn capture plate northeast
+			}
+						}
+		if (x<7 && y>0)	{				
+		if (board_x > x&& board_y > y &&(sc.get_position(x-1, y-1)==null) && x-1 > -1 && y-1 > -1){
 		spawn_plates(x-1, y-1);
 		}
-		else if (board_x < x && (sc.get_position(x+1, y-1)==null)){
+						}
+		if (x<7 && y >0) {
+		if (board_x < x && board_y > y &&(sc.get_position(x+1, y-1)==null) && y-1 > -1 && x+1<8){
 	spawn_plates(x+1, y-1);
-			}
+		}		
+						}
 	}
-
+	if (this.name == "black_checker")
+	{
+		if (x>0 && y>0)	{
+			if (board_x > x&& (sc.get_position(x-1, y-1)==null)){
+				spawn_plates(x-1, y-1);
+			}
+						}
+		if (x<7 && y>0)	{
+		if (board_x < x && (sc.get_position(x+1, y-1)==null)){
+		spawn_plates(x+1, y-1);
+			}
+						}
+	}
+									
     }
 }
