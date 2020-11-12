@@ -144,7 +144,7 @@ public class Checker : MonoBehaviour
         GameManager sc = controller.GetComponent<GameManager>();
         if (sc.position_open(x, y))
         {
-            GameObject ch = sc.get_position(x, y);
+            GameObject ch = sc.get_position(x, y); //ch is an a
 
             if (ch == null)
             {
