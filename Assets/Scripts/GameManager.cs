@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
 
     public void change_player() //!<When called, changes the current player
     {
+        is_game_over();
         if (current_player == "red")
         {
             current_player = "black";

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
+    public bool capture = false;
+
     ///references.
     public GameObject controller;
     public GameObject moveplate;
@@ -159,7 +161,7 @@ public class Checker : MonoBehaviour
         }
     }
 
-    public void spawn_plates(int arrayX, int arrayY) //!<Spawns and places move plates visually on the board
+    public void spawn_plates(int arrayX, int arrayY, bool capture = false) //!<Spawns and places move plates visually on the board
     {
         float x = arrayX;
         float y = arrayY;
@@ -171,6 +173,12 @@ public class Checker : MonoBehaviour
         y += -13.15f;
 
         GameObject mp = Instantiate(moveplate, new Vector3(x, y, -3.0f), Quaternion.identity); //!< Displays plate on screen
+        if (capture)
+        {
+            mp.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f); //!<Changes moveplate sprite to red on capture
+        }
+
+
 
         ///Keeps track of new position.
         movescript mpScript = mp.GetComponent<movescript>();
@@ -191,12 +199,12 @@ public class Checker : MonoBehaviour
 		{
 		if (x>0  && y < 7)	{	
 			if (board_x > x && (sc.get_position(x-1, y+1)==null) && y+1 < 8 && x-1 > -1){
-				spawn_plates(x-1, y+1);
+				spawn_plates(x-1, y+1, true);
 			}
 							}
 		if (x<7 && y < 7)	{
 		if (board_x <x && (sc.get_position(x+1, y+1)==null) && x+1 < 8 && y+1 <8){
-				spawn_plates(x+1, y+1);
+                    spawn_plates(x+1, y+1, true);
 			}
 							}
 		}
@@ -204,22 +212,22 @@ public class Checker : MonoBehaviour
 	{
 		if (x>0 && y<7)	{
 		if (board_x > x && board_y < y && (sc.get_position(x-1, y+1)==null) && y+1 < 8 && x-1 > -1){
-				spawn_plates(x-1, y+1);
+                    spawn_plates(x-1, y+1, true);
 			}
 						}
 		if (x<7 && y<7)	{				
 		 if (board_x < x && board_y < y && (sc.get_position(x+1, y+1)==null) && x+1<8 && y+1 < 8){
-				spawn_plates(x+1, y+1); //spawn capture plate northeast
+                    spawn_plates(x+1, y+1, true); //spawn capture plate northeast
 			}
 						}
 		if (x<7 && y>0)	{				
 		if (board_x > x&& board_y > y &&(sc.get_position(x-1, y-1)==null) && x-1 > -1 && y-1 > -1){
-		spawn_plates(x-1, y-1);
+                    spawn_plates(x-1, y-1, true);
 		}
 						}
 		if (x<7 && y >0) {
 		if (board_x < x && board_y > y &&(sc.get_position(x+1, y-1)==null) && y-1 > -1 && x+1<8){
-	spawn_plates(x+1, y-1);
+                    spawn_plates(x+1, y-1, true);
 		}		
 						}
 	}
@@ -227,12 +235,12 @@ public class Checker : MonoBehaviour
 	{
 		if (x>0 && y>0)	{
 			if (board_x > x&& (sc.get_position(x-1, y-1)==null)){
-				spawn_plates(x-1, y-1);
+                    spawn_plates(x-1, y-1, true);
 			}
 						}
 		if (x<7 && y>0)	{
 		if (board_x < x && (sc.get_position(x+1, y-1)==null)){
-		spawn_plates(x+1, y-1);
+                    spawn_plates(x+1, y-1, true);
 			}
 						}
 	}

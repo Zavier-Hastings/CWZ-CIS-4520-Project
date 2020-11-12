@@ -13,25 +13,29 @@ public class movescript : MonoBehaviour
     int arrayX;
     int arrayY;
 
-    public bool capture = false; //!<false = movement, true = capture
+   // public bool capture = false; //!<false = movement, true = capture
     
     public void Start()
     {
-        if (capture)
+        /*
+        bool cap = reference.GetComponent<Checker>().capture;
+        if (cap)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f); //!<Changes moveplate sprite to red on capture
         }
+        */
     }
 
     public void OnMouseUp() //!<When move plate is clicked, moves checker to the move plate's spot, removes move plates, destroys captured checkerss, and kings checkers
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
 
-        if (capture)
+        /* if (capture)
         {
             GameObject ch = controller.GetComponent<GameManager>().get_position(arrayX, arrayY);
             Destroy(ch);
         }
+        */
 
         controller.GetComponent<GameManager>().move_space(reference.GetComponent<Checker>().get_board_x(),
             reference.GetComponent<Checker>().get_board_y());
@@ -44,7 +48,7 @@ public class movescript : MonoBehaviour
 	int oldY = reference.GetComponent<Checker>().get_board_y(); // where the piece was
 
 	if (oldY + 2 == newY || oldY - 2 == newY) { // if is moving more than one row, is a capture, so 
-		// average the coordinates to identify
+        // average the coordinates to identify
 	 	GameObject ch = controller.GetComponent<GameManager>().get_position((oldX+newX)/2, (oldY+newY)/2);
 		Destroy(ch); // remove the captured piece.
 		}
