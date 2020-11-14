@@ -15,7 +15,7 @@ public class Checker : MonoBehaviour
     private int board_y = -1;
 
     ///variable for different players.
-    private string player;
+    public string player { get; private set; }
 
     public Sprite red_checker;
     public Sprite black_checker;

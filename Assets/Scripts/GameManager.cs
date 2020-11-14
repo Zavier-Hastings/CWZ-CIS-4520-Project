@@ -97,18 +97,38 @@ public class GameManager : MonoBehaviour
         return current_player;
     }
 
-    public bool is_game_over() //!<Returns game_over
+    public bool is_game_over() //!<Returns game_over. Also checks for game over conditions.
     {
-        return game_over;
+
+        int upper_Bound_X = positions.GetUpperBound(0);
+        int upper_Bound_Y = positions.GetUpperBound(1);
+        for (int index_x = 0; index_x <= upper_Bound_X; index_x ++)
+        {
+            for (int index_y = 0; index_y <= upper_Bound_Y; index_y++)
+            {
+                GameObject ch = get_position(index_x, index_y);
+                if (ch != null && current_player != ch.GetComponent<Checker>().player) //!<If the space being checked is a checker, and that checker is not the same color as the current player, the game is not over
+                {
+                    return game_over = false;
+                }
+            }
+        }
+        if (!can_red_move() && !can_black_move()) //!<If neither player can move, the game ends.
+        {
+            return game_over = true;
+        }
+
+        return game_over = true; //!<If all conditionals have been checked, it defaults to the game being over. As of currently, it only reaches this point if there is no checker that is the opposite color of the current player.
     }
 
-    public void change_player() //!<When called, changes the current player
+    public void change_player() //!<When called, checks if the game is over, then changes the current player
     {
         is_game_over();
-        if (current_player == "red")
+        if (current_player == "red" && can_black_move()) //!<If black has no available moves, it skips back to red
         {
             current_player = "black";
-        } else
+        }
+        else if (current_player == "black" && can_red_move()) //!<If red has no available moves, it skips back to black
         {
             current_player = "red";
         }
@@ -123,4 +143,217 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("SampleScene");
         }
     }
+
+    public bool can_red_move()
+    {
+        int upper_Bound_X = positions.GetUpperBound(0);
+        int upper_Bound_Y = positions.GetUpperBound(1);
+        for (int index_x = 0; index_x <= upper_Bound_X; index_x++)
+        {
+            for (int index_y = 0; index_y <= upper_Bound_Y; index_y++)
+            {
+                GameObject ch1 = get_position(index_x, index_y);
+                GameObject ch2;
+                if (ch1 != null && current_player == ch1.GetComponent<Checker>().player && current_player == "red") //!<Checking possible moves for red player
+                {
+                    if (ch1.GetComponent<Checker>().name == "red_checker") //!<Checking possible moves for red checker
+                    {
+                        if ( position_open(index_x + 1,index_y + 1) ) //!<Check if there is a space to the right. If yes, continue on.
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y + 1)) == null) //!<Check for unblocked normal move to right
+                            {
+                                return true;
+                            } 
+                        } else if ( position_open(index_x + 2, index_y + 2) && position_open(index_x + 1, index_y + 1) ) //!<Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y + 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x + 2, index_y + 2)) == null) //!<Check for unblocked jump to right
+                            {
+                                return true;
+                            }
+                        } else if (position_open(index_x - 1, index_y + 1)) //!<Check if there is space to left
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y + 1)) == null) //!<Check for unblocked normal move to left
+                            {
+                                return true;
+                            }
+                        } else if ( position_open(index_x - 2, index_y + 2) && position_open(index_x - 1, index_y + 1) ) //Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y + 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x - 2, index_y + 2)) == null) //!<Check for unblocked jump to left
+                            {
+                                return true;
+                            }
+                        }
+                    } else if (ch1.GetComponent<Checker>().name == "red_king")
+                    {
+                        if (position_open(index_x + 1, index_y + 1)) //!<Check if there is a space to the right. If yes, continue on.
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y + 1)) == null) //!<Check for unblocked normal move to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x + 2, index_y + 2) && position_open(index_x + 1, index_y + 1)) //!<Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y + 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x + 2, index_y + 2)) == null) //!<Check for unblocked jump to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 1, index_y + 1)) //!<Check if there is space to left
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y + 1)) == null) //!<Check for unblocked normal move to left
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 2, index_y + 2) && position_open(index_x - 1, index_y + 1)) //Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y + 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x - 2, index_y + 2)) == null) //!<Check for unblocked jump to left
+                            {
+                                return true;
+                            }
+                        } 
+                        else if (position_open(index_x + 1, index_y - 1)) //!<Check if there is a space to the right. If yes, continue on.
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y - 1)) == null) //!<Check for unblocked normal move to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x + 2, index_y - 2) && position_open(index_x + 1, index_y - 1)) //!<Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y - 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x + 2, index_y - 2)) == null) //!<Check for unblocked jump to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 1, index_y - 1)) //!<Check if there is space to left
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y - 1)) == null) //!<Check for unblocked normal move to left
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 2, index_y - 2) && position_open(index_x - 1, index_y - 1)) //Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y - 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x - 2, index_y - 2)) == null) //!<Check for unblocked jump to left
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }            
+            }
+        }
+        return false; //!<If no condition was met, red cannot move and the turn should go to black.
+    }
+
+    public bool can_black_move()
+    {
+        int upper_Bound_X = positions.GetUpperBound(0);
+        int upper_Bound_Y = positions.GetUpperBound(1);
+        for (int index_x = 0; index_x <= upper_Bound_X; index_x++)
+        {
+            for (int index_y = 0; index_y <= upper_Bound_Y; index_y++)
+            {
+                GameObject ch1 = get_position(index_x, index_y);
+                GameObject ch2;
+                if (ch1 != null && current_player == ch1.GetComponent<Checker>().player && current_player == "black") //!<Checking moves for black player
+                {
+                    if (ch1.GetComponent<Checker>().name == "black_checker") //!<Checking possible moves for red checker
+                    {
+                        if (position_open(index_x + 1, index_y - 1)) //!<Check if there is a space to the right. If yes, continue on.
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y - 1)) == null) //!<Check for unblocked normal move to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x + 2, index_y - 2) && position_open(index_x + 1, index_y - 1)) //!<Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y - 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x + 2, index_y - 2)) == null) //!<Check for unblocked jump to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 1, index_y - 1)) //!<Check if there is space to left
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y - 1)) == null) //!<Check for unblocked normal move to left
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 2, index_y - 2) && position_open(index_x - 1, index_y - 1)) //Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y - 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x - 2, index_y - 2)) == null) //!<Check for unblocked jump to left
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    else if (ch1.GetComponent<Checker>().name == "black_king")
+                    {
+                        if (position_open(index_x + 1, index_y + 1)) //!<Check if there is a space to the right. If yes, continue on.
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y + 1)) == null) //!<Check for unblocked normal move to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x + 2, index_y + 2) && position_open(index_x + 1, index_y + 1)) //!<Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y + 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x + 2, index_y + 2)) == null) //!<Check for unblocked jump to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 1, index_y + 1)) //!<Check if there is space to left
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y + 1)) == null) //!<Check for unblocked normal move to left
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 2, index_y + 2) && position_open(index_x - 1, index_y + 1)) //Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y + 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x - 2, index_y + 2)) == null) //!<Check for unblocked jump to left
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x + 1, index_y - 1)) //!<Check if there is a space to the right. If yes, continue on.
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y - 1)) == null) //!<Check for unblocked normal move to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x + 2, index_y - 2) && position_open(index_x + 1, index_y - 1)) //!<Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x + 1, index_y - 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x + 2, index_y - 2)) == null) //!<Check for unblocked jump to right
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 1, index_y - 1)) //!<Check if there is space to left
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y - 1)) == null) //!<Check for unblocked normal move to left
+                            {
+                                return true;
+                            }
+                        }
+                        else if (position_open(index_x - 2, index_y - 2) && position_open(index_x - 1, index_y - 1)) //Check if there is space to jump over a checker
+                        {
+                            if ((ch2 = get_position(index_x - 1, index_y - 1)).GetComponent<Checker>().player != current_player && (ch2 = get_position(index_x - 2, index_y - 2)) == null) //!<Check for unblocked jump to left
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false; //!<If no condition was met, black player cannot move and turn should go to red
+    }
+
 }
