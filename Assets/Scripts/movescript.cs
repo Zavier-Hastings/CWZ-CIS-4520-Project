@@ -51,7 +51,9 @@ public class movescript : MonoBehaviour
         // average the coordinates to identify
 	 	GameObject ch = controller.GetComponent<GameManager>().get_position((oldX+newX)/2, (oldY+newY)/2);
 		Destroy(ch); // remove the captured piece.
-		}
+            
+
+        }
 
         reference.GetComponent<Checker>().set_board_x(arrayX);
         reference.GetComponent<Checker>().set_board_y(arrayY);

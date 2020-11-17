@@ -124,11 +124,11 @@ public class GameManager : MonoBehaviour
     public void change_player() //!<When called, checks if the game is over, then changes the current player
     {
         is_game_over();
-        if (current_player == "red" && can_black_move()) //!<If black has no available moves, it skips back to red
+        if (current_player == "red" ) //!<If black has no available moves, it skips back to red.  —>Deleted out && can_black_move()
         {
             current_player = "black";
         }
-        else if (current_player == "black" && can_red_move()) //!<If red has no available moves, it skips back to black
+        else if (current_player == "black") //!<If red has no available moves, it skips back to black—-> took out && can_red_move()
         {
             current_player = "red";
         }
