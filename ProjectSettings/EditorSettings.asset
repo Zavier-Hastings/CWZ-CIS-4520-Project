@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!159 &1
@@ -39,6 +40,8 @@ EditorSettings:
   m_CacheServerEnableAuth: 0
   m_CacheServerEnableTls: 0
 =======
+=======
+>>>>>>> Stashed changes
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!159 &1
@@ -78,4 +81,7 @@ EditorSettings:
   m_CacheServerEnableUpload: 1
   m_CacheServerEnableAuth: 0
   m_CacheServerEnableTls: 0
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
