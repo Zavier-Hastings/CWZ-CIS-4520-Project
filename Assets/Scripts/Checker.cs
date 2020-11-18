@@ -220,7 +220,7 @@ public class Checker : MonoBehaviour
                     spawn_plates(x+1, y+1, true); //spawn capture plate northeast
 			}
 						}
-		if (x<7 && y>0)	{				
+		if (x<7 && y>0 && (x-1 > -1))	{				
 		if (board_x > x&& board_y > y &&(sc.get_position(x-1, y-1)==null) && x-1 > -1 && y-1 > -1){
                     spawn_plates(x-1, y-1, true);
 		}
