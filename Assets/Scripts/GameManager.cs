@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private string current_player = "red"; //!<Starting player
 
+    public bool has_checker_jumped = false;
+
     private bool game_over = false; //!<Variable for game over
 
     void Start() //!<On play, creates checkers and puts them in their appropriate positions in the array

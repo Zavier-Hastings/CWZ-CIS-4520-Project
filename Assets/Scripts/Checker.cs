@@ -5,13 +5,14 @@ using UnityEngine;
 public class Checker : MonoBehaviour
 {
     public bool capture = false;
+    public bool jumped { get; set; }
 
     ///references.
     public GameObject controller;
     public GameObject moveplate;
 
     ///positions.
-    private int board_x = -1; 
+    private int board_x = -1;
     private int board_y = -1;
 
     ///variable for different players.
@@ -35,18 +36,20 @@ public class Checker : MonoBehaviour
 
         if (this.name == "red_checker")
         {
-            this.GetComponent<SpriteRenderer>().sprite = red_checker; player = "red";
+            this.GetComponent<SpriteRenderer>().sprite = red_checker; player = "red"; jumped = false;
         }
         else if (this.name == "black_checker")
         {
-            this.GetComponent<SpriteRenderer>().sprite = black_checker; player = "black";
-        } else if (this.name == "red_king")
+            this.GetComponent<SpriteRenderer>().sprite = black_checker; player = "black"; jumped = false;
+        }
+        else if (this.name == "red_king")
         {
-            this.GetComponent<SpriteRenderer>().sprite = red_king; player = "red";
+            this.GetComponent<SpriteRenderer>().sprite = red_king; player = "red"; jumped = false;
             controller.GetComponent<GameManager>().set_position(gameObject); //!<Kings aren't called at game start, so position must be set when they appear
-        } else if (this.name == "black_king")
+        }
+        else if (this.name == "black_king")
         {
-            this.GetComponent<SpriteRenderer>().sprite = black_king; player = "black";
+            this.GetComponent<SpriteRenderer>().sprite = black_king; player = "black"; jumped = false;
             controller.GetComponent<GameManager>().set_position(gameObject);
         }
     }
@@ -92,7 +95,6 @@ public class Checker : MonoBehaviour
         GameObject ch = controller.GetComponent<GameManager>().get_position(board_x, board_y);
         Destroy(ch);
         controller.GetComponent<GameManager>().Create("red_king", board_x, board_y);
-        
     }
 
     public void create_b_king() //!<Creates black king and removes previous checkeri
@@ -100,15 +102,18 @@ public class Checker : MonoBehaviour
         GameObject ch = controller.GetComponent<GameManager>().get_position(board_x, board_y);
         Destroy(ch);
         controller.GetComponent<GameManager>().Create("black_king", board_x, board_y);
-
     }
 
     private void OnMouseUp() //!<Removes and creates move plates for checkers after clicking a checker
     {
         if (!controller.GetComponent<GameManager>().is_game_over() && controller.GetComponent<GameManager>().get_current_player() == player)
         {
-            remove_plates();
-            checker_plates();
+            if (!controller.GetComponent<GameManager>().has_checker_jumped)
+            {
+                remove_plates();
+                checker_plates();
+            }
+
         }
     }
 
@@ -132,7 +137,8 @@ public class Checker : MonoBehaviour
         {
             place_plates(board_x - 1, board_y - 1);
             place_plates(board_x + 1, board_y - 1);
-        } else if (this.name == "red_king" || this.name == "black_king")
+        }
+        else if (this.name == "red_king" || this.name == "black_king")
         {
             place_plates(board_x - 1, board_y - 1);
             place_plates(board_x + 1, board_y - 1);
@@ -148,15 +154,14 @@ public class Checker : MonoBehaviour
         {
             GameObject ch = sc.get_position(x, y); //ch is an a
 
-            if (ch == null)
+            if (ch == null && !this.jumped)
             {
                 spawn_plates(x, y);
             }
-            else if (ch.GetComponent<Checker>().player != player)
+            else if (ch != null && ch.GetComponent<Checker>().player != player) //Error points to here, when I attempt to check ch without checking if ch is null first
             {
-    
-		spawn_capture_plates(x, y);
-		
+                spawn_capture_plates(x, y);
+
             }
         }
     }
@@ -179,71 +184,170 @@ public class Checker : MonoBehaviour
         }
 
 
-
         ///Keeps track of new position.
         movescript mpScript = mp.GetComponent<movescript>();
         mpScript.set_reference(gameObject);
         mpScript.set_coords(arrayX, arrayY);
     }
 
-    //to create capture plates properly, there will need to be two spawn plates
-    //for a movement to the left, and a movement to the right, and this will
-    //have to be done continously until there are no more jumps left. Will also
-    //have to delete capture plates as they are created until we reach the end
-    //of that jump. In addition, combine with move plate spawn
 
     public void spawn_capture_plates(int x, int y)
     {
-	GameManager sc = controller.GetComponent<GameManager>();
-	if (this.name == "red_checker") //!<Check if the piece being moved is red, so will y axis will inrease
-		{
-		if (x>0  && y < 7)	{	
-			if (board_x > x && (sc.get_position(x-1, y+1)==null) && y+1 < 8 && x-1 > -1){
-				spawn_plates(x-1, y+1, true);
-			}
-							}
-		if (x<7 && y < 7)	{
-		if (board_x <x && (sc.get_position(x+1, y+1)==null) && x+1 < 8 && y+1 <8){
-                    spawn_plates(x+1, y+1, true);
-			}
-							}
-		}
-	if (this.name == "red_king" || this.name == "black_king")
-	{
-		if (x>0 && y<7)	{
-		if (board_x > x && board_y < y && (sc.get_position(x-1, y+1)==null) && y+1 < 8 && x-1 > -1){
-                    spawn_plates(x-1, y+1, true);
-			}
-						}
-		if (x<7 && y<7)	{				
-		 if (board_x < x && board_y < y && (sc.get_position(x+1, y+1)==null) && x+1<8 && y+1 < 8){
-                    spawn_plates(x+1, y+1, true); //spawn capture plate northeast
-			}
-						}
-		if (x<7 && y>0 && (x-1 > -1))	{				
-		if (board_x > x&& board_y > y &&(sc.get_position(x-1, y-1)==null) && x-1 > -1 && y-1 > -1){
-                    spawn_plates(x-1, y-1, true);
-		}
-						}
-		if (x<7 && y >0) {
-		if (board_x < x && board_y > y &&(sc.get_position(x+1, y-1)==null) && y-1 > -1 && x+1<8){
-                    spawn_plates(x+1, y-1, true);
-		}		
-						}
-	}
-	if (this.name == "black_checker")
-	{
-		if (x>0 && y>0)	{
-			if (board_x > x&& (sc.get_position(x-1, y-1)==null)){
-                    spawn_plates(x-1, y-1, true);
-			}
-						}
-		if (x<7 && y>0)	{
-		if (board_x < x && (sc.get_position(x+1, y-1)==null)){
-                    spawn_plates(x+1, y-1, true);
-			}
-						}
-	}
-									
+        GameManager sc = controller.GetComponent<GameManager>();
+        if (this.name == "red_checker") //!<Check if the piece being moved is red, so will y axis will inrease
+        {
+            if (x > 0 && y < 7)
+            {
+                if (board_x > x && (sc.get_position(x - 1, y + 1) == null) && y + 1 < 8 && x - 1 > -1)
+                {
+                    spawn_plates(x - 1, y + 1, true);
+                }
+            }
+            if (x < 7 && y < 7)
+            {
+                if (board_x < x && (sc.get_position(x + 1, y + 1) == null) && x + 1 < 8 && y + 1 < 8)
+                {
+                    spawn_plates(x + 1, y + 1, true);
+                }
+            }
+        }
+
+        else if (this.name == "red_king" || this.name == "black_king")
+        {
+            if (x > 0 && y < 7)
+            {
+                if (board_x > x && board_y < y && (sc.get_position(x - 1, y + 1) == null) && y + 1 < 8 && x - 1 > -1)
+                {
+                    spawn_plates(x - 1, y + 1, true);
+                }
+            }
+            if (x < 7 && y < 7)
+            {
+                if (board_x < x && board_y < y && (sc.get_position(x + 1, y + 1) == null) && x + 1 < 8 && y + 1 < 8)
+                {
+                    spawn_plates(x + 1, y + 1, true); //spawn capture plate northeast
+                }
+            }
+            if (x < 7 && y > 0 && (x - 1 > -1))
+            {
+                if (board_x > x && board_y > y && (sc.get_position(x - 1, y - 1) == null) && x - 1 > -1 && y - 1 > -1)
+                {
+                    spawn_plates(x - 1, y - 1, true);
+                }
+            }
+            if (x < 7 && y > 0)
+            {
+                if (board_x < x && board_y > y && (sc.get_position(x + 1, y - 1) == null) && y - 1 > -1 && x + 1 < 8)
+                {
+                    spawn_plates(x + 1, y - 1, true);
+                }
+            }
+        }
+
+        else if (this.name == "black_checker")
+        {
+            if (x > 0 && y > 0)
+            {
+                if (board_x > x && (sc.get_position(x - 1, y - 1) == null))
+                {
+                    spawn_plates(x - 1, y - 1, true);
+                }
+            }
+            if (x < 7 && y > 0)
+            {
+                if (board_x < x && (sc.get_position(x + 1, y - 1) == null))
+                {
+                    spawn_plates(x + 1, y - 1, true);
+                }
+            }
+        }
+
+
+    }
+
+    public bool double_jump(int x, int y)
+    {
+        GameManager sc = controller.GetComponent<GameManager>();
+        if (this.name == "red_checker") //!<Check if the piece being moved is red, so will y axis will inrease
+        {
+            if (x > 0 && y < 7)
+            {
+                if (board_x > x && (sc.get_position(x - 1, y + 1) == null) && y + 1 < 8 && x - 1 > -1)
+                {
+                    spawn_plates(x - 1, y + 1, capture = true);
+                    return true;
+                }
+            }
+            if (x < 7 && y < 7)
+            {
+                if (board_x < x && (sc.get_position(x + 1, y + 1) == null) && x + 1 < 8 && y + 1 < 8)
+                {
+                    spawn_plates(x + 1, y + 1, capture = true);
+                    return true;
+                }
+            }
+        }
+
+        else if (this.name == "red_king" || this.name == "black_king")
+        {
+            if (x > 0 && y < 7)
+            {
+                if (board_x > x && board_y < y && (sc.get_position(x - 1, y + 1) == null) && y + 1 < 8 && x - 1 > -1)
+                {
+                    spawn_plates(x - 1, y + 1, capture = true);
+                    return true;
+                }
+            }
+            if (x < 7 && y < 7)
+            {
+                if (board_x < x && board_y < y && (sc.get_position(x + 1, y + 1) == null) && x + 1 < 8 && y + 1 < 8)
+                {
+                    spawn_plates(x + 1, y + 1, capture = true);
+                    return true;
+                }
+            }
+            if (x < 7 && y > 0 && (x - 1 > -1))
+            {
+                if (board_x > x && board_y > y && (sc.get_position(x - 1, y - 1) == null) && x - 1 > -1 && y - 1 > -1)
+                {
+                    spawn_plates(x - 1, y - 1, capture = true);
+                    return true;
+                }
+            }
+            if (x < 7 && y > 0)
+            {
+                if (board_x < x && board_y > y && (sc.get_position(x + 1, y - 1) == null) && y - 1 > -1 && x + 1 < 8)
+                {
+                    spawn_plates(x + 1, y - 1, capture = true);
+                    return true;
+                }
+            }
+        }
+
+        else if (this.name == "black_checker")
+        {
+            if (x > 0 && y > 0)
+            {
+                if (board_x > x && (sc.get_position(x - 1, y - 1) == null))
+                {
+                    spawn_plates(x - 1, y - 1, capture = true);
+                    return true;
+                }
+            }
+            if (x < 7 && y > 0)
+            {
+                if (board_x < x && (sc.get_position(x + 1, y - 1) == null))
+                {
+                    spawn_plates(x + 1, y - 1, capture = true);
+                    return true;
+                }
+            }
+        }
+        return this.jumped = false;
+    }
+
+    public void remove_from_board()
+    {
+        Destroy(this);
     }
 }
