@@ -46,7 +46,9 @@ public class movescript : MonoBehaviour
         { // if is moving more than one row, is a capture, so 
           // average the coordinates to identify
             GameObject ch = controller.GetComponent<GameManager>().get_position((oldX + newX) / 2, (oldY + newY) / 2);
+            controller.GetComponent<GameManager>().set_pos_null(ch);
             Destroy(ch); // remove the captured piece.
+            //ch.GetComponent<Checker>().remove_from_board()  Alternate Destroy skip to see if destroying the check within the Checker script fixed it.
             reference.GetComponent<Checker>().jumped = true;
             controller.GetComponent<GameManager>().has_checker_jumped = true;
         }

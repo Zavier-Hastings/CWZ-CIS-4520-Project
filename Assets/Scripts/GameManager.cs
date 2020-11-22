@@ -72,10 +72,16 @@ public class GameManager : MonoBehaviour
         return obj;
     }
 
-        public void set_position(GameObject obj) //!<Sets position of checkers
+    public void set_position(GameObject obj) //!<Sets position of checkers
     {
         Checker ch = obj.GetComponent<Checker>();
         positions[ch.get_board_x(), ch.get_board_y()] = obj;
+    }
+
+    public void set_pos_null(GameObject obj)                    //test code to set the reference to a position to null
+    {
+        Checker ch = obj.GetComponent<Checker>();
+        positions[ch.get_board_x(), ch.get_board_y()] = null;
     }
 
     public void move_space(int x, int y) //!<Removes old checker when checkers are moved
