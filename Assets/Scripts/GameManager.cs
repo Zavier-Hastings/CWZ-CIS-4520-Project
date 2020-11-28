@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     ///allows prefab checker to be used as checker_piece in script.
-    public GameObject checker_piece; 
+    public GameObject checker_piece;
+
+    ///variable to hold simpleUI image
+    public GameObject trackerUI;
 
     ///positions and number of checkers for each player.
     private GameObject[,] positions = new GameObject[8, 8];
@@ -59,6 +62,8 @@ public class GameManager : MonoBehaviour
             set_position(player_red[i]);
             set_position(player_black[i]);
         }
+
+        CreateUI();
     }
 
     public GameObject Create(string name, int x, int y) //!<Creates checker piece and sets name and board position
@@ -69,6 +74,15 @@ public class GameManager : MonoBehaviour
         ch.set_board_x(x);
         ch.set_board_y(y);
         ch.Activate();
+        return obj;
+    }
+
+    public Object CreateUI()
+    {
+        GameObject obj = Instantiate(trackerUI, new Vector3(-31.25f, 0.13f, -1), Quaternion.identity);
+        //GameObject tr = GameObject.FindGameObjectWithTag("UI"); //Instantiate(trackerUI, new Vector3(400, 400, -1), Quaternion.identity);
+        GameTracker tr = obj.GetComponent<GameTracker>();
+        tr.Activate();
         return obj;
     }
 
@@ -131,14 +145,17 @@ public class GameManager : MonoBehaviour
 
     public void change_player() //!<When called, checks if the game is over, then changes the current player
     {
+        GameObject tracker = GameObject.FindGameObjectWithTag("UI");
         is_game_over();
         if (current_player == "red" && can_black_move() ) //!<If black has no available moves, it skips back to red.  —>Deleted out && can_black_move()
         {
-            current_player = "black";
+            current_player = "black";            
+            tracker.GetComponent<GameTracker>().increment_turn();
         }
         else if (current_player == "black" && can_red_move() ) //!<If red has no available moves, it skips back to black—-> took out && can_red_move()
         {
             current_player = "red";
+            tracker.GetComponent<GameTracker>().increment_turn();
         }
     }
 

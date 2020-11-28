@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checker_piece: {fileID: 1812766897242455367, guid: ebe25e6a90ddf7c4c9544eaf1baecd62, type: 3}
+  trackerUI: {fileID: 484662609147311540, guid: 84d2235ab0f67ab4fbc0f5838bdaa873, type: 3}
+  has_checker_jumped: 0
+  turn_counter: 0
