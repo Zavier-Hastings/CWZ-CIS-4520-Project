@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     ///variable to hold simpleUI image
     public GameObject trackerUI;
+    public int round = 1;
 
     ///positions and number of checkers for each player.
     private GameObject[,] positions = new GameObject[8, 8];
@@ -77,10 +78,9 @@ public class GameManager : MonoBehaviour
         return obj;
     }
 
-    public Object CreateUI()
+    public Object CreateUI() //!<Creates UI elements at start and places them in the game view
     {
         GameObject obj = Instantiate(trackerUI, new Vector3(-31.25f, 0.13f, -1), Quaternion.identity);
-        //GameObject tr = GameObject.FindGameObjectWithTag("UI"); //Instantiate(trackerUI, new Vector3(400, 400, -1), Quaternion.identity);
         GameTracker tr = obj.GetComponent<GameTracker>();
         tr.Activate();
         return obj;
@@ -139,7 +139,6 @@ public class GameManager : MonoBehaviour
         {
             return game_over = true;
         }
-
         return game_over = true; //!<If all conditionals have been checked, it defaults to the game being over. As of currently, it only reaches this point if there is no checker that is the opposite color of the current player.
     }
 
@@ -163,8 +162,10 @@ public class GameManager : MonoBehaviour
     {
         if (game_over == true && Input.GetMouseButtonDown(0) )
         {
+            GameObject tracker = GameObject.FindGameObjectWithTag("UI");
+            tracker.GetComponent<GameTracker>().increment_round();
+            round++;
             game_over = false;
-
             SceneManager.LoadScene("SampleScene");
         }
     }
