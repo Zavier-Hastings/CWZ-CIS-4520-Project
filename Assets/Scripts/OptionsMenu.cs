@@ -18,13 +18,29 @@ public class OptionsMenu : MonoBehaviour
 
         List<string> options = new List<string>();
 
+        int currentResolutionIndex = 0;
+
         for (int a = 0; a < resolutions.Length; a++)
         {
             string option = resolutions[a].width + " x " + resolutions[a].height;
             options.Add(option);
+
+            if (resolutions[a].width == Screen.currentResolution.width && 
+                resolutions[a].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = a;
+            }
         }
 
         resolutionDropdown.AddOptions(options);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
+
+    public void SetResolution (int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
     
     public void SetQuality (int qualityIndex)
