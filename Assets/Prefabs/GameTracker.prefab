@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f0a871dc930e34a874f20edd9a4d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tracker: {fileID: 21300000, guid: f5c08716cdf9c1f44b852666e89b10ff, type: 3}
+  Tracker: {fileID: 21300000, guid: 8f1cbc43a13f6654c93258e73598bb62, type: 3}
   TurnCount: {fileID: 2741038772040688547, guid: 3a225dca1a37b734aa67fe38255736e6, type: 3}
   RoundCount: {fileID: 3508445326175074779, guid: 81413933717262d4f9e14cfe0b4cd6b8, type: 3}
   canvas: {fileID: 5619415040508872476, guid: 3c77935394f779e42aebc92b52c468b3, type: 3}

@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     ///variable to hold simpleUI image
     public GameObject trackerUI;
-    public int round = 1;
 
     ///positions and number of checkers for each player.
     private GameObject[,] positions = new GameObject[8, 8];
@@ -162,9 +161,6 @@ public class GameManager : MonoBehaviour
     {
         if (game_over == true && Input.GetMouseButtonDown(0) )
         {
-            GameObject tracker = GameObject.FindGameObjectWithTag("UI");
-            tracker.GetComponent<GameTracker>().increment_round();
-            round++;
             game_over = false;
             SceneManager.LoadScene("SampleScene");
         }
