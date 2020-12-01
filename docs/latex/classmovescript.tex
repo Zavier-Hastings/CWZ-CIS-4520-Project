@@ -9,32 +9,87 @@ Inheritance diagram for movescript\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classmovescript_aaf0fb17cfe07bb5a9ccfcc6a5aa25093}\label{classmovescript_aaf0fb17cfe07bb5a9ccfcc6a5aa25093}} 
-void {\bfseries Start} ()
+void \mbox{\hyperlink{classmovescript_aaf0fb17cfe07bb5a9ccfcc6a5aa25093}{Start}} ()
 \item 
-\mbox{\Hypertarget{classmovescript_a6d53a844106abd42f8b2a22f7df5504a}\label{classmovescript_a6d53a844106abd42f8b2a22f7df5504a}} 
-void {\bfseries On\+Mouse\+Up} ()
+void \mbox{\hyperlink{classmovescript_a6d53a844106abd42f8b2a22f7df5504a}{On\+Mouse\+Up}} ()
 \item 
-\mbox{\Hypertarget{classmovescript_ae5516b1f98be5591f381190da38b520d}\label{classmovescript_ae5516b1f98be5591f381190da38b520d}} 
-void {\bfseries set\+\_\+coords} (int x, int y)
+void \mbox{\hyperlink{classmovescript_ae5516b1f98be5591f381190da38b520d}{set\+\_\+coords}} (int x, int y)
 \item 
-\mbox{\Hypertarget{classmovescript_aee9990a08a2dd3fced839e42a90732c8}\label{classmovescript_aee9990a08a2dd3fced839e42a90732c8}} 
-void {\bfseries set\+\_\+reference} (Game\+Object obj)
+void \mbox{\hyperlink{classmovescript_aee9990a08a2dd3fced839e42a90732c8}{set\+\_\+reference}} (Game\+Object obj)
 \item 
-\mbox{\Hypertarget{classmovescript_ade9bf1f7c5ba2e21843f16112c0cd38f}\label{classmovescript_ade9bf1f7c5ba2e21843f16112c0cd38f}} 
-Game\+Object {\bfseries get\+\_\+reference} ()
+Game\+Object \mbox{\hyperlink{classmovescript_ade9bf1f7c5ba2e21843f16112c0cd38f}{get\+\_\+reference}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+Game\+Object \mbox{\hyperlink{classmovescript_a53396f1486ac240c15ab338afa4323cb}{controller}}
+\begin{DoxyCompactList}\small\item\em Reference variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmovescript_ade9bf1f7c5ba2e21843f16112c0cd38f}\label{classmovescript_ade9bf1f7c5ba2e21843f16112c0cd38f}} 
+\index{movescript@{movescript}!get\_reference@{get\_reference}}
+\index{get\_reference@{get\_reference}!movescript@{movescript}}
+\doxysubsubsection{\texorpdfstring{get\_reference()}{get\_reference()}}
+{\footnotesize\ttfamily Game\+Object movescript.\+get\+\_\+reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classmovescript_a6d53a844106abd42f8b2a22f7df5504a}\label{classmovescript_a6d53a844106abd42f8b2a22f7df5504a}} 
+\index{movescript@{movescript}!OnMouseUp@{OnMouseUp}}
+\index{OnMouseUp@{OnMouseUp}!movescript@{movescript}}
+\doxysubsubsection{\texorpdfstring{OnMouseUp()}{OnMouseUp()}}
+{\footnotesize\ttfamily void movescript.\+On\+Mouse\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Set new space for piece.
+
+Keep track of new location.
+
+Controller tracks new position as well.
+
+If a red checker makes it to the other end of the board, it will be kinged
+
+Otherwise, if a black checker makes it to the other side of the board, it will be kinged\mbox{\Hypertarget{classmovescript_ae5516b1f98be5591f381190da38b520d}\label{classmovescript_ae5516b1f98be5591f381190da38b520d}} 
+\index{movescript@{movescript}!set\_coords@{set\_coords}}
+\index{set\_coords@{set\_coords}!movescript@{movescript}}
+\doxysubsubsection{\texorpdfstring{set\_coords()}{set\_coords()}}
+{\footnotesize\ttfamily void movescript.\+set\+\_\+coords (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Sets move plate coordinates \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovescript_aee9990a08a2dd3fced839e42a90732c8}\label{classmovescript_aee9990a08a2dd3fced839e42a90732c8}} 
+\index{movescript@{movescript}!set\_reference@{set\_reference}}
+\index{set\_reference@{set\_reference}!movescript@{movescript}}
+\doxysubsubsection{\texorpdfstring{set\_reference()}{set\_reference()}}
+{\footnotesize\ttfamily void movescript.\+set\+\_\+reference (\begin{DoxyParamCaption}\item[{Game\+Object}]{obj }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Sets reference \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmovescript_aaf0fb17cfe07bb5a9ccfcc6a5aa25093}\label{classmovescript_aaf0fb17cfe07bb5a9ccfcc6a5aa25093}} 
+\index{movescript@{movescript}!Start@{Start}}
+\index{Start@{Start}!movescript@{movescript}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily void movescript.\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classmovescript_a53396f1486ac240c15ab338afa4323cb}\label{classmovescript_a53396f1486ac240c15ab338afa4323cb}} 
-Game\+Object {\bfseries controller}
-\item 
-\mbox{\Hypertarget{classmovescript_ab14d016b0df918be3623a66a7bc407fc}\label{classmovescript_ab14d016b0df918be3623a66a7bc407fc}} 
-bool {\bfseries capture} = false
-\end{DoxyCompactItemize}
+\index{movescript@{movescript}!controller@{controller}}
+\index{controller@{controller}!movescript@{movescript}}
+\doxysubsubsection{\texorpdfstring{controller}{controller}}
+{\footnotesize\ttfamily Game\+Object movescript.\+controller}
+
+
+
+Reference variables. 
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/chris/\+C\+W\+Z-\/\+C\+I\+S-\/4520-\/\+Project/\+Assets/\+Scripts/movescript.\+cs\end{DoxyCompactItemize}
+Assets/\+Scripts/\mbox{\hyperlink{movescript_8cs}{movescript.\+cs}}\end{DoxyCompactItemize}

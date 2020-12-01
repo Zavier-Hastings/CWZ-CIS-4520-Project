@@ -9,29 +9,276 @@ Inheritance diagram for Game\+Manager\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_game_manager_a768d98333dd60f0a4e827ed86e690dfc}\label{class_game_manager_a768d98333dd60f0a4e827ed86e690dfc}} 
-Game\+Object {\bfseries Create} (string name, int x, int y)
+Game\+Object \mbox{\hyperlink{class_game_manager_a768d98333dd60f0a4e827ed86e690dfc}{Create}} (string name, int x, int y)
 \item 
-\mbox{\Hypertarget{class_game_manager_a61c91c88fa57a917f99b3cc438058d96}\label{class_game_manager_a61c91c88fa57a917f99b3cc438058d96}} 
-void {\bfseries set\+\_\+position} (Game\+Object obj)
+Object \mbox{\hyperlink{class_game_manager_a1f9b1e4c2355a56417d40b6a81087f73}{Create\+UI}} ()
 \item 
-\mbox{\Hypertarget{class_game_manager_a063a832ef9cd6e839371fab87677b835}\label{class_game_manager_a063a832ef9cd6e839371fab87677b835}} 
-void {\bfseries move\+\_\+space} (int x, int y)
+void \mbox{\hyperlink{class_game_manager_a61c91c88fa57a917f99b3cc438058d96}{set\+\_\+position}} (Game\+Object obj)
 \item 
-\mbox{\Hypertarget{class_game_manager_a990151dc4ecf80ab1930b8a5e7e14681}\label{class_game_manager_a990151dc4ecf80ab1930b8a5e7e14681}} 
-Game\+Object {\bfseries get\+\_\+position} (int x, int y)
+void \mbox{\hyperlink{class_game_manager_a83fee1c8ac502930ee3a94088f128724}{set\+\_\+pos\+\_\+null}} (Game\+Object obj)
 \item 
-\mbox{\Hypertarget{class_game_manager_a56d7d2673806bcbbc8eeefc54102ed34}\label{class_game_manager_a56d7d2673806bcbbc8eeefc54102ed34}} 
-bool {\bfseries position\+\_\+open} (int x, int y)
+void \mbox{\hyperlink{class_game_manager_a063a832ef9cd6e839371fab87677b835}{move\+\_\+space}} (int x, int y)
+\item 
+Game\+Object \mbox{\hyperlink{class_game_manager_a990151dc4ecf80ab1930b8a5e7e14681}{get\+\_\+position}} (int x, int y)
+\item 
+bool \mbox{\hyperlink{class_game_manager_a56d7d2673806bcbbc8eeefc54102ed34}{position\+\_\+open}} (int x, int y)
+\item 
+string \mbox{\hyperlink{class_game_manager_a39069267876d12dd38118921843b6ffc}{get\+\_\+current\+\_\+player}} ()
+\item 
+bool \mbox{\hyperlink{class_game_manager_a6d23506423efa32746cd02eb19424a30}{is\+\_\+game\+\_\+over}} ()
+\item 
+void \mbox{\hyperlink{class_game_manager_adb76f9aac7713dab5995abb8edc83f5e}{change\+\_\+player}} ()
+\item 
+void \mbox{\hyperlink{class_game_manager_a44c79b205dec16bfe650e21259860c5b}{Update}} ()
+\item 
+bool \mbox{\hyperlink{class_game_manager_a090aec38d8ddcdc6983ed4599ec2e48a}{can\+\_\+red\+\_\+move}} ()
+\item 
+bool \mbox{\hyperlink{class_game_manager_ab2c74fc887d0290ecf6ca25eddf46b6d}{can\+\_\+black\+\_\+move}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_game_manager_a962d2f893da468134313283e4a3dd0a5}\label{class_game_manager_a962d2f893da468134313283e4a3dd0a5}} 
-Game\+Object {\bfseries checker\+\_\+piece}
+Game\+Object \mbox{\hyperlink{class_game_manager_a962d2f893da468134313283e4a3dd0a5}{checker\+\_\+piece}}
+\begin{DoxyCompactList}\small\item\em allows prefab checker to be used as checker\+\_\+piece in script. \end{DoxyCompactList}\item 
+Game\+Object \mbox{\hyperlink{class_game_manager_a14898f6c1cc24b3dea3e033fa537ed38}{tracker\+UI}}
+\begin{DoxyCompactList}\small\item\em variable to hold simple\+UI image \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_game_manager_a6c4420c810742fc80fc8fc33e911c8a9}{has\+\_\+checker\+\_\+jumped}} = false
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_manager_ab2c74fc887d0290ecf6ca25eddf46b6d}\label{class_game_manager_ab2c74fc887d0290ecf6ca25eddf46b6d}} 
+\index{GameManager@{GameManager}!can\_black\_move@{can\_black\_move}}
+\index{can\_black\_move@{can\_black\_move}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{can\_black\_move()}{can\_black\_move()}}
+{\footnotesize\ttfamily bool Game\+Manager.\+can\+\_\+black\+\_\+move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$<$Checking moves for black player
+
+$<$Checking possible moves for red checker
+
+$<$Check if there is a space to the right. If yes, continue on.
+
+$<$Check for unblocked normal move to right
+
+$<$Check if there is space to jump over a checker
+
+$<$Check for unblocked jump to right
+
+$<$Check if there is space to left
+
+$<$Check for unblocked normal move to left
+
+$<$Check for unblocked jump to left
+
+$<$Check if there is a space to the right. If yes, continue on.
+
+$<$Check for unblocked normal move to right
+
+$<$Check if there is space to jump over a checker
+
+$<$Check for unblocked jump to right
+
+$<$Check if there is space to left
+
+$<$Check for unblocked normal move to left
+
+$<$Check for unblocked jump to left
+
+$<$Check if there is a space to the right. If yes, continue on.
+
+$<$Check for unblocked normal move to right
+
+$<$Check if there is space to jump over a checker
+
+$<$Check for unblocked jump to right
+
+$<$Check if there is space to left
+
+$<$Check for unblocked normal move to left
+
+$<$Check for unblocked jump to left
+
+$<$If no condition was met, black player cannot move and turn should go to red\mbox{\Hypertarget{class_game_manager_a090aec38d8ddcdc6983ed4599ec2e48a}\label{class_game_manager_a090aec38d8ddcdc6983ed4599ec2e48a}} 
+\index{GameManager@{GameManager}!can\_red\_move@{can\_red\_move}}
+\index{can\_red\_move@{can\_red\_move}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{can\_red\_move()}{can\_red\_move()}}
+{\footnotesize\ttfamily bool Game\+Manager.\+can\+\_\+red\+\_\+move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$<$Checking possible moves for red player
+
+$<$Checking possible moves for red checker
+
+$<$Check if there is a space to the right. If yes, continue on.
+
+$<$Check for unblocked normal move to right
+
+$<$Check if there is space to jump over a checker
+
+$<$Check for unblocked jump to right
+
+$<$Check if there is space to left
+
+$<$Check for unblocked normal move to left
+
+$<$Check for unblocked jump to left
+
+$<$Check if there is a space to the right. If yes, continue on.
+
+$<$Check for unblocked normal move to right
+
+$<$Check if there is space to jump over a checker
+
+$<$Check for unblocked jump to right
+
+$<$Check if there is space to left
+
+$<$Check for unblocked normal move to left
+
+$<$Check for unblocked jump to left
+
+$<$Check if there is a space to the right. If yes, continue on.
+
+$<$Check for unblocked normal move to right
+
+$<$Check if there is space to jump over a checker
+
+$<$Check for unblocked jump to right
+
+$<$Check if there is space to left
+
+$<$Check for unblocked normal move to left
+
+$<$Check for unblocked jump to left
+
+$<$If no condition was met, red cannot move and the turn should go to black.\mbox{\Hypertarget{class_game_manager_adb76f9aac7713dab5995abb8edc83f5e}\label{class_game_manager_adb76f9aac7713dab5995abb8edc83f5e}} 
+\index{GameManager@{GameManager}!change\_player@{change\_player}}
+\index{change\_player@{change\_player}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{change\_player()}{change\_player()}}
+{\footnotesize\ttfamily void Game\+Manager.\+change\+\_\+player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$<$If black has no available moves, it skips back to red. —$>$Deleted out \&\& \mbox{\hyperlink{class_game_manager_ab2c74fc887d0290ecf6ca25eddf46b6d}{can\+\_\+black\+\_\+move()}}
+
+$<$If red has no available moves, it skips back to black—-\/$>$ took out \&\& \mbox{\hyperlink{class_game_manager_a090aec38d8ddcdc6983ed4599ec2e48a}{can\+\_\+red\+\_\+move()}}\mbox{\Hypertarget{class_game_manager_a768d98333dd60f0a4e827ed86e690dfc}\label{class_game_manager_a768d98333dd60f0a4e827ed86e690dfc}} 
+\index{GameManager@{GameManager}!Create@{Create}}
+\index{Create@{Create}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily Game\+Object Game\+Manager.\+Create (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Creates checker piece and sets name and board position \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_manager_a1f9b1e4c2355a56417d40b6a81087f73}\label{class_game_manager_a1f9b1e4c2355a56417d40b6a81087f73}} 
+\index{GameManager@{GameManager}!CreateUI@{CreateUI}}
+\index{CreateUI@{CreateUI}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{CreateUI()}{CreateUI()}}
+{\footnotesize\ttfamily Object Game\+Manager.\+Create\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_game_manager_a39069267876d12dd38118921843b6ffc}\label{class_game_manager_a39069267876d12dd38118921843b6ffc}} 
+\index{GameManager@{GameManager}!get\_current\_player@{get\_current\_player}}
+\index{get\_current\_player@{get\_current\_player}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{get\_current\_player()}{get\_current\_player()}}
+{\footnotesize\ttfamily string Game\+Manager.\+get\+\_\+current\+\_\+player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_game_manager_a990151dc4ecf80ab1930b8a5e7e14681}\label{class_game_manager_a990151dc4ecf80ab1930b8a5e7e14681}} 
+\index{GameManager@{GameManager}!get\_position@{get\_position}}
+\index{get\_position@{get\_position}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{get\_position()}{get\_position()}}
+{\footnotesize\ttfamily Game\+Object Game\+Manager.\+get\+\_\+position (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Returns positions \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_manager_a6d23506423efa32746cd02eb19424a30}\label{class_game_manager_a6d23506423efa32746cd02eb19424a30}} 
+\index{GameManager@{GameManager}!is\_game\_over@{is\_game\_over}}
+\index{is\_game\_over@{is\_game\_over}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{is\_game\_over()}{is\_game\_over()}}
+{\footnotesize\ttfamily bool Game\+Manager.\+is\+\_\+game\+\_\+over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$<$If the space being checked is a checker, and that checker is not the same color as the current player, the game is not over
+
+$<$If neither player can move, the game ends.
+
+$<$If all conditionals have been checked, it defaults to the game being over. As of currently, it only reaches this point if there is no checker that is the opposite color of the current player.\mbox{\Hypertarget{class_game_manager_a063a832ef9cd6e839371fab87677b835}\label{class_game_manager_a063a832ef9cd6e839371fab87677b835}} 
+\index{GameManager@{GameManager}!move\_space@{move\_space}}
+\index{move\_space@{move\_space}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{move\_space()}{move\_space()}}
+{\footnotesize\ttfamily void Game\+Manager.\+move\+\_\+space (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Removes old checker when checkers are moved \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_manager_a56d7d2673806bcbbc8eeefc54102ed34}\label{class_game_manager_a56d7d2673806bcbbc8eeefc54102ed34}} 
+\index{GameManager@{GameManager}!position\_open@{position\_open}}
+\index{position\_open@{position\_open}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{position\_open()}{position\_open()}}
+{\footnotesize\ttfamily bool Game\+Manager.\+position\+\_\+open (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Checks if a position is occupied or empty \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_manager_a83fee1c8ac502930ee3a94088f128724}\label{class_game_manager_a83fee1c8ac502930ee3a94088f128724}} 
+\index{GameManager@{GameManager}!set\_pos\_null@{set\_pos\_null}}
+\index{set\_pos\_null@{set\_pos\_null}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{set\_pos\_null()}{set\_pos\_null()}}
+{\footnotesize\ttfamily void Game\+Manager.\+set\+\_\+pos\+\_\+null (\begin{DoxyParamCaption}\item[{Game\+Object}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_game_manager_a61c91c88fa57a917f99b3cc438058d96}\label{class_game_manager_a61c91c88fa57a917f99b3cc438058d96}} 
+\index{GameManager@{GameManager}!set\_position@{set\_position}}
+\index{set\_position@{set\_position}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{set\_position()}{set\_position()}}
+{\footnotesize\ttfamily void Game\+Manager.\+set\+\_\+position (\begin{DoxyParamCaption}\item[{Game\+Object}]{obj }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Sets position of checkers \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_manager_a44c79b205dec16bfe650e21259860c5b}\label{class_game_manager_a44c79b205dec16bfe650e21259860c5b}} 
+\index{GameManager@{GameManager}!Update@{Update}}
+\index{Update@{Update}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_manager_a962d2f893da468134313283e4a3dd0a5}\label{class_game_manager_a962d2f893da468134313283e4a3dd0a5}} 
+\index{GameManager@{GameManager}!checker\_piece@{checker\_piece}}
+\index{checker\_piece@{checker\_piece}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{checker\_piece}{checker\_piece}}
+{\footnotesize\ttfamily Game\+Object Game\+Manager.\+checker\+\_\+piece}
+
+
+
+allows prefab checker to be used as checker\+\_\+piece in script. 
+
+\mbox{\Hypertarget{class_game_manager_a6c4420c810742fc80fc8fc33e911c8a9}\label{class_game_manager_a6c4420c810742fc80fc8fc33e911c8a9}} 
+\index{GameManager@{GameManager}!has\_checker\_jumped@{has\_checker\_jumped}}
+\index{has\_checker\_jumped@{has\_checker\_jumped}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{has\_checker\_jumped}{has\_checker\_jumped}}
+{\footnotesize\ttfamily bool Game\+Manager.\+has\+\_\+checker\+\_\+jumped = false}
+
+\mbox{\Hypertarget{class_game_manager_a14898f6c1cc24b3dea3e033fa537ed38}\label{class_game_manager_a14898f6c1cc24b3dea3e033fa537ed38}} 
+\index{GameManager@{GameManager}!trackerUI@{trackerUI}}
+\index{trackerUI@{trackerUI}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{trackerUI}{trackerUI}}
+{\footnotesize\ttfamily Game\+Object Game\+Manager.\+tracker\+UI}
+
+
+
+variable to hold simple\+UI image 
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/chris/\+C\+W\+Z-\/\+C\+I\+S-\/4520-\/\+Project/\+Assets/\+Scripts/Game\+Manager.\+cs\end{DoxyCompactItemize}
+Assets/\+Scripts/\mbox{\hyperlink{_game_manager_8cs}{Game\+Manager.\+cs}}\end{DoxyCompactItemize}
